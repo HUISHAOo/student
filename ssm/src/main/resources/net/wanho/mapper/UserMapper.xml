@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.wanho.mapper.UserMapper">
+
+    <resultMap id="userMap" type="User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+
+    <!--<insert id="addUser" parameterType="net.wanho.pojo.User">
+        INSERT INTO USER VALUES (NULL ,#{username},#{password})
+    </insert>-->
+
+    <delete id="deleteUser" parameterType="integer">
+        DELETE FROM users WHERE id=#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE users SET password=#{password} WHERE id=#{id}
+    </update>
+
+    <select id="getAllUsers" resultMap="userMap">
+        SELECT * FROM users
+    </select>
+
+    <select id="getUserById" resultMap="userMap" parameterType="integer">
+        SELECT * FROM users WHERE uid='%${value}%'
+    </select>
+    <select id="getUserByName" resultMap="userMap" parameterType="integer" >
+    SELECT * FROM users WHERE user='%${value}%'
+    </select>
+    <insert id="addUser" parameterType="net.wanho.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users VALUES (NULL ,#{username},#{password})
+    </insert>
+
+
+</mapper>
